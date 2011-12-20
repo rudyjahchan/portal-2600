@@ -4,8 +4,8 @@
   dim grid0x = b
   dim grid0y = c
   dim gravityCounter = d
-  dim gravity = e
-  dim jumpCounter = f
+  dim v0x = e
+  dim v0y = f
   dim p0state = g
   dim myjoystick = h
 
@@ -13,8 +13,7 @@
   p0y = 16
   frame = 0
   gravityCounter = 0
-  gravity = 0
-  jumpCounter = 0
+  v0y = 0
   p0state = 0
 
   playfield:
@@ -47,6 +46,7 @@ joystick
   if joy0left then myjoystick = 1
 
 checkmove
+  if joy0up && !p0state{0} then v0y = 0-1
   if myjoystick = 1 then REFP0 = 8
   if joy0right || joy0left then goto move
   player0:
@@ -123,18 +123,21 @@ gravity
   w = (p0y + 1)/8
   if p0state{0} then goto checkfall
   if !pfread(grid0x,w) then p0state{0} = 1 : goto falling
-  goto mainloop
+  goto applyforces
 
 checkfall
   if !pfread(grid0x,w) then goto falling
   gravityCounter = 0 
-  gravity = 0 
+  v0y = 0 
   p0y = w*8 
   p0state{0} = 0
-  goto mainloop
+  goto applyforces
 
 falling
   gravityCounter = gravityCounter + 1
-  if gravityCounter = 4 then gravity = gravity + 1 : gravityCounter = 0
-  p0y = p0y + gravity
+  if gravityCounter = 4 then v0y = v0y + 1 : gravityCounter = 0
+  p0y = p0y + v0y
+
+applyforces
+  p0y = p0y + v0y
   goto mainloop
