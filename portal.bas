@@ -1,3 +1,5 @@
+  set debug cyclescore
+
   dim frame = a
   dim p0x = x
   dim p0y = y
@@ -8,7 +10,9 @@
   dim v0y = f
   dim p0state = g
   dim myjoystick = h
+  dim minicycles = z
 
+  minicycles = 255
   p0x = 25
   p0y = 16
   frame = 0
@@ -26,7 +30,7 @@
    X..XXXXXXXXXX..................X
    X...............X..............X
    X...........XXXXX..............X
-   X..............................X
+   X.....................XX..XX...X
    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 end
 
@@ -42,11 +46,13 @@ mainloop
   grid0y = (p0y - 1)/8
 
 joystick
-  if joy0right then myjoystick = 4 : goto checkmove
+  w = p0y/8
+  r = pfread(grid0x,w)
+  if !r && joy0up && !p0state{0} then v0y = 0-1
+  if joy0right then myjoystick = 4
   if joy0left then myjoystick = 1
 
 checkmove
-  if joy0up && !p0state{0} then v0y = 0-1
   if myjoystick = 1 then REFP0 = 8
   if joy0right || joy0left then goto move
   player0:
@@ -127,9 +133,9 @@ gravity
 
 checkfall
   if !pfread(grid0x,w) then goto falling
-  gravityCounter = 0 
-  v0y = 0 
-  p0y = w*8 
+  gravityCounter = 0
+  v0y = 0
+  p0y = w*8
   p0state{0} = 0
   goto applyforces
 
