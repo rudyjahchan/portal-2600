@@ -7,6 +7,8 @@
 
  MAC titlescreenlayout
 	draw_48x2_1
+  draw_48x2_2
+	draw_48x2_3
 	; draw_48x1_2
 	; draw_space 3
 	; draw_gameselect
