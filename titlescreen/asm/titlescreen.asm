@@ -1,8 +1,8 @@
 
- include "will-you-marry-me/asm/layoutmacros.asm"
- include "will-you-marry-me/titlescreen_layout.asm"
+ include "titlescreen/asm/layoutmacros.asm"
+ include "titlescreen/titlescreen_layout.asm"
 
-.willyoumarrymedrawscreen
+.titledrawscreen
 title_eat_overscan
  	;bB runs in overscan. Wait for the overscan to run out...
 	clc
@@ -65,54 +65,54 @@ title_playfield
 
 	jmp PFWAIT ; kernel is done. Finish off the screen
 
- include "will-you-marry-me/titlescreen_color.asm"
+ include "titlescreen/titlescreen_color.asm"
 
 	#ifconst mk_48x1_on
-	include "will-you-marry-me/asm/48x1_kernel.asm"
+	include "titlescreen/asm/48x1_kernel.asm"
 	#endif ;mk_48x1_on
 
 	#ifconst mk_48x1_1_on
-	include "will-you-marry-me/asm/48x1_1_kernel.asm"
+	include "titlescreen/asm/48x1_1_kernel.asm"
 	#endif ;mk_48x1_1_on
 
 	#ifconst mk_48x1_2_on
-	include "will-you-marry-me/asm/48x1_2_kernel.asm"
+	include "titlescreen/asm/48x1_2_kernel.asm"
 	#endif ;mk_48x1_2_on
 
 	#ifconst mk_48x1_3_on
-	include "will-you-marry-me/asm/48x1_3_kernel.asm"
+	include "titlescreen/asm/48x1_3_kernel.asm"
 	#endif ;mk_48x1_3_on
 
 	#ifconst mk_48x2_1_on
-	include "will-you-marry-me/asm/48x2_1_kernel.asm"
+	include "titlescreen/asm/48x2_1_kernel.asm"
 	#endif ;mk_48x2_1_on
 
 	#ifconst mk_48x2_2_on
-	include "will-you-marry-me/asm/48x2_2_kernel.asm"
+	include "titlescreen/asm/48x2_2_kernel.asm"
 	#endif ;mk_48x2_2_on
 
 	#ifconst mk_48x2_3_on
-	include "will-you-marry-me/asm/48x2_3_kernel.asm"
+	include "titlescreen/asm/48x2_3_kernel.asm"
 	#endif ;mk_48x2_3_on
 
 	#ifconst mk_96x2_1_on
-	include "will-you-marry-me/asm/96x2_1_kernel.asm"
+	include "titlescreen/asm/96x2_1_kernel.asm"
 	#endif ;mk_96x2_1_on
 
 	#ifconst mk_96x2_2_on
-	include "will-you-marry-me/asm/96x2_2_kernel.asm"
+	include "titlescreen/asm/96x2_2_kernel.asm"
 	#endif ;mk_96x2_2_on
 
 	#ifconst mk_96x2_3_on
-	include "will-you-marry-me/asm/96x2_3_kernel.asm"
+	include "titlescreen/asm/96x2_3_kernel.asm"
 	#endif ;mk_96x2_3_on
 
 	#ifconst mk_score_on
-	include "will-you-marry-me/asm/score_kernel.asm"
+	include "titlescreen/asm/score_kernel.asm"
 	#endif ;mk_score_on
 
 	#ifconst mk_gameselect_on
-	include "will-you-marry-me/asm/gameselect_kernel.asm"
+	include "titlescreen/asm/gameselect_kernel.asm"
 	#endif ;mk_gameselect_on
 
 PFWAIT
@@ -136,40 +136,40 @@ OVERSCAN
 	RETURN
 
  #ifconst mk_48x1_1_on
-	include "will-you-marry-me/48x1_1_image.asm"
+	include "titlescreen/48x1_1_image.asm"
  #endif
  #ifconst mk_48x1_2_on
-	include "will-you-marry-me/48x1_2_image.asm"
+	include "titlescreen/48x1_2_image.asm"
  #endif
  #ifconst mk_48x1_3_on
-	include "will-you-marry-me/48x1_3_image.asm"
+	include "titlescreen/48x1_3_image.asm"
  #endif
 
  #ifconst mk_48x2_1_on
-	include "will-you-marry-me/48x2_1_image.asm"
+	include "titlescreen/48x2_1_image.asm"
  #endif
  #ifconst mk_48x2_2_on
-	include "will-you-marry-me/48x2_2_image.asm"
+	include "titlescreen/48x2_2_image.asm"
  #endif
  #ifconst mk_48x2_3_on
-	include "will-you-marry-me/48x2_3_image.asm"
+	include "titlescreen/48x2_3_image.asm"
  #endif
 
  #ifconst mk_96x2_1_on
-	include "will-you-marry-me/96x2_1_image.asm"
+	include "titlescreen/96x2_1_image.asm"
  #endif
  #ifconst mk_96x2_2_on
-	include "will-you-marry-me/96x2_2_image.asm"
+	include "titlescreen/96x2_2_image.asm"
  #endif
  #ifconst mk_96x2_3_on
-	include "will-you-marry-me/96x2_3_image.asm"
+	include "titlescreen/96x2_3_image.asm"
  #endif
 
  #ifconst mk_score_on
-	include "will-you-marry-me/score_image.asm"
+	include "titlescreen/score_image.asm"
  #endif
 
  #ifconst mk_gameselect_on
-	include "will-you-marry-me/gameselect_image.asm"
+	include "titlescreen/gameselect_image.asm"
  #endif
 

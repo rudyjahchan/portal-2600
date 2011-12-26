@@ -3,8 +3,8 @@
  ; You can also do a "dim titlescreencolor=[letter]" in bB
  ; if you want to change the color on the fly.
 
- ifnconst titlescreencolor
-titlescreencolor
+ ifnconst wymmscreencolor
+wymmscreencolor
  endif
  .byte $0F
 
