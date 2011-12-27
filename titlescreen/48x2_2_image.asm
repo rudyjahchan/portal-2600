@@ -15,11 +15,11 @@ bmp_48x2_2_height = 5
 
  ;*** The color of each line in the bitmap, in reverse order...
 bmp_48x2_2_colors 
-	BYTE $0f
-	BYTE $0f
-	BYTE $0f
-	BYTE $0f
-	BYTE $0f
+	BYTE $00
+	BYTE $00
+	BYTE $00
+	BYTE $00
+	BYTE $00
 
 
    if >. != >[.+bmp_48x2_2_height]
@@ -29,9 +29,9 @@ bmp_48x2_2_colors
 
 bmp_48x2_2_00
  ; *** replace this block with your bimap_00 data block...
+	BYTE %00001000
+	BYTE %00001000
 	BYTE %00001110
-	BYTE %00001010
-	BYTE %00001100
 	BYTE %00001010
 	BYTE %00001110
 
@@ -43,11 +43,11 @@ bmp_48x2_2_00
 
 bmp_48x2_2_01
  ; *** replace this block with your bimap_01 data block...
-	BYTE %10001010
-	BYTE %10001010
-	BYTE %10101011
-	BYTE %11011010
-	BYTE %10001011
+	BYTE %10101110
+	BYTE %10101000
+	BYTE %11001110
+	BYTE %10101000
+	BYTE %11101110
 
 
    if >. != >[.+bmp_48x2_2_height]
@@ -57,11 +57,11 @@ bmp_48x2_2_01
 
 bmp_48x2_2_02
  ; *** replace this block with your bimap_02 data block...
-	BYTE %01110001
-	BYTE %00000001
-	BYTE %10000111
-	BYTE %10000101
-	BYTE %10000101
+	BYTE %11101110
+	BYTE %00100010
+	BYTE %11101110
+	BYTE %10001000
+	BYTE %11101110
 
 
    if >. != >[.+bmp_48x2_2_height]
@@ -71,11 +71,11 @@ bmp_48x2_2_02
 
 bmp_48x2_2_03
  ; *** replace this block with your bimap_03 data block...
-	BYTE %01110000
-	BYTE %01010101
-	BYTE %01110010
-	BYTE %01010101
-	BYTE %01110000
+	BYTE %00001000
+	BYTE %00001000
+	BYTE %00001110
+	BYTE %00001000
+	BYTE %00001110
 
 
    if >. != >[.+bmp_48x2_2_height]
@@ -85,11 +85,11 @@ bmp_48x2_2_03
 
 bmp_48x2_2_04
  ; *** replace this block with your bimap_04 data block...
-	BYTE %01110111
-	BYTE %01000000
-	BYTE %01110000
-	BYTE %00010000
-	BYTE %01110000
+	BYTE %11101010
+	BYTE %01001010
+	BYTE %01001100
+	BYTE %01001010
+	BYTE %11101110
 
 
    if >. != >[.+bmp_48x2_2_height]
@@ -99,10 +99,10 @@ bmp_48x2_2_04
 
 bmp_48x2_2_05
  ; *** replace this block with your bimap_05 data block...
-	BYTE %01110000
-	BYTE %01000000
-	BYTE %01110000
-	BYTE %00010000
-	BYTE %01110000
+	BYTE %11100000
+	BYTE %10000000
+	BYTE %11100000
+	BYTE %10000000
+	BYTE %11100000
 
 

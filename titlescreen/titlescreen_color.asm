@@ -6,5 +6,5 @@
  ifnconst titlescreencolor
 titlescreencolor
  endif
- .byte $00
+ .byte $0F
 
