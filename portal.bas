@@ -1,6 +1,21 @@
   set romsize 8k
-mainmenu
 
+  const orange = $3A
+  const blue = $AA
+
+  dim bmp_48x1_1_color = a
+  dim frame = d
+
+  bmp_48x1_1_color = blue
+  frame = 0
+
+mainmenu
+  frame = frame + 1
+  if frame < 30 then goto drawmainmenu
+  if bmp_48x1_1_color = blue then bmp_48x1_1_color = orange else bmp_48x1_1_color = blue
+  frame = 0
+
+drawmainmenu
   gosub titledrawscreen 
   if joy0fire then goto willyoumarryme
   goto mainmenu
