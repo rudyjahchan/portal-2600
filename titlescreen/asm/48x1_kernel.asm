@@ -2,7 +2,7 @@
 ;	this is jumped to by any used 48x1adv minikernel, after the sprite
 ;	pointers have been setup and y has been set to the height of the image 
 
-wymm_draw_bmp_48x1adv
+draw_bmp_48x1adv
 
 	lda #3
 	sta NUSIZ0	;3=Player and Missile are drawn twice 32 clocks apart 
@@ -12,7 +12,7 @@ wymm_draw_bmp_48x1adv
 	stx GRP1
 	clc
 
-	lda wymmscreencolor
+	lda titlescreencolor
 	sta COLUPF
 	lda #%11111111
 	sta PF1
@@ -68,15 +68,15 @@ wymm_draw_bmp_48x1adv
 	sta ENABL
 	sta ENAM0
 
-	jmp wymm_pf48x1_loop 	;3
+	jmp pf48x1_loop 	;3
 
       if >. != >[.+$5e]
       align 256
       endif
 
-wymm_pf48x1_loop
+pf48x1_loop
 	sleep 6
-wymm_pf48x1_loop_line1
+pf48x1_loop_line1
 
 	lda (scorepointers+0),y 	;5
 	sta GRP0		;3
@@ -104,16 +104,16 @@ wymm_pf48x1_loop_line1
 	sty GRP0
 
 	lda aux3 		;3
-	beq wymm_pf48x1_loop_line2 	;2/3
+	beq pf48x1_loop_line2 	;2/3
 	sleep 2
 
 	dey
 	cpy #255
-	bne wymm_pf48x1_loop_line1		;2/3
+	bne pf48x1_loop_line1		;2/3
 
-	jmp wymm_pf48x1_codeend
+	jmp pf48x1_codeend
 
-wymm_pf48x1_loop_line2
+pf48x1_loop_line2
 
 	lda (scorepointers+0),y 	;5
 	sta GRP0		;3
@@ -146,10 +146,10 @@ wymm_pf48x1_loop_line2
 	;sleep 6
 	dey
 	;cmp #255
-	bpl wymm_pf48x1_loop_line1		;2/3
+	bpl pf48x1_loop_line1		;2/3
 
-wymm_pf48x1_codeend
- ;echo "critical code in 48x1 is ",(wymm_pf48x1_codeend-wymm_pf48x1_loop), " bytes long."
+pf48x1_codeend
+ ;echo "critical code in 48x1 is ",(pf48x1_codeend-pf48x1_loop), " bytes long."
 
 	lda #0
 	sta GRP0
