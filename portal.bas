@@ -15,6 +15,7 @@
   dim p0GY = h
   dim p0GYDown = i
   dim jumpCounter = j
+  dim runDirection = k
 
   bmp_48x1_1_color = blue
   frame = 0
@@ -34,7 +35,8 @@ drawmainmenu
 begin
   player0x = 128
   player0y = 13
-
+  frame = 0
+  runDirection = 0
 
 start
   if switchreset then reboot
@@ -67,8 +69,8 @@ end
   p0GY = (player0y - 4) / 8
   p0GYUp = (player0y - 8) / 8
 
-  if joy0left then player0x = player0x - 1
-  if joy0right then player0x = player0x + 1
+  if joy0left then player0x = player0x - 1 : runDirection = 4
+  if joy0right then player0x = player0x + 1 : runDirection = 0
 
   if !pfread(p0GX,p0GYDown) then player0y = player0y + 1
   if pfread(p0GXRight,p0GY) then player0x = player0x - 1
@@ -79,6 +81,9 @@ end
   if jumpCounter>0 && jumpCounter<11 then player0y = player0y - 2 : jumpCounter = jumpCounter + 1
   if jumpCounter>10 then jumpCounter = 0
 
+  if runDirection>2 && runDirection<6 then REFP0 = 8
+  if jumpCounter>0 then goto jumpFrame
+  if joy0left || joy0right then goto animate else frame = 0
   player0:
   %00011000
   %00011000
@@ -89,8 +94,69 @@ end
   %00001100
   %00001100
 end
+  goto donesetframe
 
-  drawscreen
+animate
+  if frame = 0 then player0:
+        %01000100
+        %00100100
+        %00011100
+        %00011000
+        %00111100
+        %00011000
+        %00001100
+        %00001100
+end
+
+  if frame = 8 then player0:
+        %00000100
+        %00100010
+        %01010100
+        %00011000
+        %10011110
+        %01111001
+        %00001100
+        %00001100
+end
+
+  if frame = 16 then player0:
+        %00001000
+        %00110100
+        %00010100
+        %00011000
+        %01011110
+        %00111000
+        %00001100
+        %00001100
+end
+
+  if frame = 24 then player0:
+        %00001000
+        %00011000
+        %00011000
+        %00011000
+        %00111100
+        %00011000
+        %00001100
+        %00001100
+end
+
+  frame = frame + 1
+  if frame > 31 then frame = 0
+  goto donesetframe
+
+jumpFrame player0:
+        %00000100
+        %00100010
+        %01010100
+        %00011000
+        %10011110
+        %01111001
+        %00001100
+        %00001100
+end
+
+donesetframe drawscreen
   goto start
 
 
