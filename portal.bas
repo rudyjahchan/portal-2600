@@ -18,7 +18,7 @@ mainmenu
   frame = 0
 
 drawmainmenu
-  gosub titledrawscreen
+  gosub titledrawscreen bank2
   if joy0fire then goto cakeisalie
   goto mainmenu
 
@@ -30,27 +30,24 @@ cakeisalie
   goto cakeisalie
 
 ourloveisreal
-  gosub lovedrawscreen bank3
+  gosub lovedrawscreen bank2
   screenwait = screenwait + 1
   if screenwait < 30 then goto ourloveisreal
   if joy0fire then goto willyoumarryme
   goto ourloveisreal
 
 willyoumarryme
-  gosub willyoumarrymedrawscreen bank2
+  gosub willyoumarrymedrawscreen bank3
   goto willyoumarryme
-
-  asm
-  include "titlescreen/asm/titlescreen.asm"
-end
 
   bank 2
   asm
+  include "titlescreen/asm/titlescreen.asm"
   include "cake-is-a-lie/asm/cakescreen.asm"
-  include "will-you-marry-me/asm/wymmscreen.asm"
+  include "our-love-is-real/asm/lovescreen.asm"
 end
 
   bank 3
   asm
-  include "our-love-is-real/asm/lovescreen.asm"
+  include "will-you-marry-me/asm/wymmscreen.asm"
 end
