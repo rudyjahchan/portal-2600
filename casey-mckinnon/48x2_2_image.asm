@@ -1,20 +1,20 @@
 
  ;*** The height of the displayed data...
-wymm_bmp_48x2_2_window = 48
+casey_bmp_48x2_2_window = 48
 
  ;*** The height of the bitmap data. This can be larger than 
  ;*** the displayed data height, if you're scrolling or animating 
  ;*** the data...
-wymm_bmp_48x2_2_height = 48
+casey_bmp_48x2_2_height = 48
 
-   if >. != >[.+(wymm_bmp_48x2_2_height)]
+   if >. != >[.+(casey_bmp_48x2_2_height)]
       align 256
    endif
  BYTE 0 ; leave this here!
 
 
  ;*** The color of each line in the bitmap, in reverse order...
-wymm_bmp_48x2_2_colors 
+casey_bmp_48x2_2_colors 
 	BYTE $00
 	BYTE $00
 	BYTE $00
@@ -52,25 +52,25 @@ wymm_bmp_48x2_2_colors
 	BYTE $00
 	BYTE $00
 	BYTE $00
-	BYTE $3A
-	BYTE $3A
-	BYTE $3A
-	BYTE $3A
-	BYTE $AA
-	BYTE $AA
-	BYTE $AA
-	BYTE $AA
-	BYTE $AA
-	BYTE $AA
-	BYTE $AA
+	BYTE $00
+	BYTE $00
+	BYTE $00
+	BYTE $00
+	BYTE $00
+	BYTE $00
+	BYTE $00
+	BYTE $00
+	BYTE $00
+	BYTE $00
+	BYTE $00
 
 
-   if >. != >[.+wymm_bmp_48x2_2_height]
+   if >. != >[.+casey_bmp_48x2_2_height]
       align 256
    endif
 
 
-wymm_bmp_48x2_2_00
+casey_bmp_48x2_2_00
  ; *** replace this block with your bimap_00 data block...
   BYTE %00111111
   BYTE %01111111
@@ -109,24 +109,24 @@ wymm_bmp_48x2_2_00
   BYTE %11111111
   BYTE %11111111
   BYTE %11111111
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %01111111
+  BYTE %00111111
 
-   if >. != >[.+wymm_bmp_48x2_2_height]
+   if >. != >[.+casey_bmp_48x2_2_height]
       align 256
    endif
 
 
-wymm_bmp_48x2_2_01
+casey_bmp_48x2_2_01
  ; *** replace this block with your bimap_01 data block...
   BYTE %11111111
   BYTE %11111111
@@ -165,25 +165,25 @@ wymm_bmp_48x2_2_01
   BYTE %11111111
   BYTE %11111111
   BYTE %11111111
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
 
 
-   if >. != >[.+wymm_bmp_48x2_2_height]
+   if >. != >[.+casey_bmp_48x2_2_height]
       align 256
    endif
 
 
-wymm_bmp_48x2_2_02
+casey_bmp_48x2_2_02
  ; *** replace this block with your bimap_02 data block...
   BYTE %11110000
   BYTE %11110000
@@ -221,26 +221,26 @@ wymm_bmp_48x2_2_02
   BYTE %11110000
   BYTE %11110000
   BYTE %11110000
-  BYTE %11111111
-  BYTE %00110000
-  BYTE %00111000
-  BYTE %00011111
-  BYTE %00001111
-  BYTE %00000001
-  BYTE %00000010
-  BYTE %00000100
-  BYTE %00001000
-  BYTE %00010111
-  BYTE %00001000
-  BYTE %00000111
+  BYTE %11110111
+  BYTE %11110111
+  BYTE %11110111
+  BYTE %11110111
+  BYTE %11110111
+  BYTE %11110111
+  BYTE %11110111
+  BYTE %11110111
+  BYTE %11110000
+  BYTE %11110000
+  BYTE %11110000
+  BYTE %11110000
 
 
-   if >. != >[.+wymm_bmp_48x2_2_height]
+   if >. != >[.+casey_bmp_48x2_2_height]
       align 256
    endif
 
 
-wymm_bmp_48x2_2_03
+casey_bmp_48x2_2_03
  ; *** replace this block with your bimap_03 data block...
   BYTE %00001111
   BYTE %00001111
@@ -278,26 +278,26 @@ wymm_bmp_48x2_2_03
   BYTE %00001111
   BYTE %00001111
   BYTE %00001111
-  BYTE %11111111
-  BYTE %00001100
-  BYTE %00011100
-  BYTE %11111000
-  BYTE %11110000
-  BYTE %10000000
-  BYTE %01000000
-  BYTE %00100000
-  BYTE %00010000
-  BYTE %11101000
-  BYTE %00010000
-  BYTE %11100000
+  BYTE %11101111
+  BYTE %11101111
+  BYTE %11101111
+  BYTE %11101111
+  BYTE %11101111
+  BYTE %11101111
+  BYTE %11101111
+  BYTE %11101111
+  BYTE %00001111
+  BYTE %00001111
+  BYTE %00001111
+  BYTE %00001111
 
 
-   if >. != >[.+wymm_bmp_48x2_2_height]
+   if >. != >[.+casey_bmp_48x2_2_height]
       align 256
    endif
 
 
-wymm_bmp_48x2_2_04
+casey_bmp_48x2_2_04
  ; *** replace this block with your bimap_04 data block...
   BYTE %11111111
   BYTE %11111111
@@ -336,25 +336,25 @@ wymm_bmp_48x2_2_04
   BYTE %11111111
   BYTE %11111111
   BYTE %11111111
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
 
 
-   if >. != >[.+wymm_bmp_48x2_2_height]
+   if >. != >[.+casey_bmp_48x2_2_height]
       align 256
    endif
 
 
-wymm_bmp_48x2_2_05
+casey_bmp_48x2_2_05
  ; *** replace this block with your bimap_05 data block...
   BYTE %11111100
   BYTE %11111110
@@ -393,16 +393,16 @@ wymm_bmp_48x2_2_05
   BYTE %11111111
   BYTE %11111111
   BYTE %11111111
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111111
+  BYTE %11111110
+  BYTE %11111100
 
 
