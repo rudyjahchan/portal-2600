@@ -14,6 +14,7 @@
   dim p0GYUp = g
   dim p0GY = h
   dim p0GYDown = i
+  dim jumpCounter = j
 
   bmp_48x1_1_color = blue
   frame = 0
@@ -72,6 +73,11 @@ end
   if !pfread(p0GX,p0GYDown) then player0y = player0y + 1
   if pfread(p0GXRight,p0GY) then player0x = player0x - 1
   if pfread(p0GXLeft,p0GY) then player0x = player0x + 1
+  if pfread(p0GX,p0GYUp) then player0y = player0y + 1
+
+  if joy0up && jumpCounter=0 && pfread(p0GX,p0GYDown) then jumpCounter = 1
+  if jumpCounter>0 && jumpCounter<11 then player0y = player0y - 2 : jumpCounter = jumpCounter + 1
+  if jumpCounter>10 then jumpCounter = 0
 
   player0:
   %00011000
