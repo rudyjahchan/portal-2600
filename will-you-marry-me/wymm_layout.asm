@@ -6,11 +6,7 @@
  ; it won't use any rom space.
 
  MAC wymmlayout
-	wymm_draw_48x2_1
-  wymm_draw_48x2_2
 	wymm_draw_48x2_3
-	; draw_48x1_2
-	; draw_space 3
-	; draw_gameselect
-	; draw_score
+  wymm_draw_48x2_2
+  wymm_draw_48x2_1
  ENDM

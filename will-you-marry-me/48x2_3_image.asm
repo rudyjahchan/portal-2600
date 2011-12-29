@@ -1,11 +1,11 @@
 
  ;*** The height of the displayed data...
-wymm_bmp_48x2_3_window = 20
+wymm_bmp_48x2_3_window = 12
 
  ;*** The height of the bitmap data. This can be larger than 
  ;*** the displayed data height, if you're scrolling or animating 
  ;*** the data...
-wymm_bmp_48x2_3_height = 20
+wymm_bmp_48x2_3_height = 12
 
    if >. != >[.+(wymm_bmp_48x2_3_height)]
       align 256
@@ -27,14 +27,6 @@ wymm_bmp_48x2_3_colors
 	BYTE $00
 	BYTE $00
 	BYTE $00
-	BYTE $00
-	BYTE $00
-	BYTE $00
-	BYTE $00
-	BYTE $00
-	BYTE $00
-	BYTE $00
-	BYTE $00
 
 
    if >. != >[.+wymm_bmp_48x2_3_height]
@@ -44,14 +36,6 @@ wymm_bmp_48x2_3_colors
 
 wymm_bmp_48x2_3_00
  ; *** replace this block with your bimap_00 data block...
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
 	BYTE %10001010
 	BYTE %10001011
 	BYTE %10101001
@@ -73,14 +57,6 @@ wymm_bmp_48x2_3_00
 
 wymm_bmp_48x2_3_01
  ; *** replace this block with your bimap_01 data block...
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
 	BYTE %00101000
 	BYTE %11101001
 	BYTE %01001111
@@ -102,14 +78,6 @@ wymm_bmp_48x2_3_01
 
 wymm_bmp_48x2_3_02
  ; *** replace this block with your bimap_02 data block...
-  BYTE %00000001
-  BYTE %00000000
-  BYTE %00000001
-  BYTE %00000001
-  BYTE %00000100
-  BYTE %00000011
-  BYTE %00000000
-  BYTE %00000000
 	BYTE %10100010
 	BYTE %00100100
 	BYTE %10111110
@@ -131,14 +99,6 @@ wymm_bmp_48x2_3_02
 
 wymm_bmp_48x2_3_03
  ; *** replace this block with your bimap_03 data block...
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %11000000
-  BYTE %00100000
-  BYTE %11000000
-  BYTE %00000000
-  BYTE %00000000
 	BYTE %00100000
 	BYTE %00100000
 	BYTE %01010000
@@ -160,14 +120,6 @@ wymm_bmp_48x2_3_03
 
 wymm_bmp_48x2_3_04
  ; *** replace this block with your bimap_04 data block...
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
 	BYTE %00001000
 	BYTE %00001000
 	BYTE %00001010
@@ -189,14 +141,6 @@ wymm_bmp_48x2_3_04
 
 wymm_bmp_48x2_3_05
  ; *** replace this block with your bimap_05 data block...
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
-  BYTE %00000000
 	BYTE %10111110
 	BYTE %10100000
 	BYTE %10111110
