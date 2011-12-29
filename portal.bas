@@ -16,6 +16,16 @@
   dim p0GYDown = i
   dim jumpCounter = j
   dim runDirection = k
+  dim aimDirection = l
+  dim initMissile0x = m
+  dim initMissile0y = n
+  dim initMissile1x = o
+  dim initMissile1y = p
+  dim orangePortalDirection = q
+  dim bluePortalDirection = r
+  dim activePortal = s
+  dim aimPortal = t
+  dim level = u
 
   bmp_48x1_1_color = blue
   frame = 0
@@ -37,6 +47,13 @@ begin
   player0y = 13
   frame = 0
   runDirection = 0
+  aimDirection = 0
+  missile0height = 4
+  missile1height = 4
+  initMissile0x = missile0x
+  initMissile0y = missile0y
+  initMissile1x = missile1x
+  initMissile1y = missile1y
 
 start
   if switchreset then reboot
@@ -45,6 +62,8 @@ start
   COLUP0 = orange
   COLUP1 = blue
   CTRLPF = $21
+  NUSIZ0=$20
+  NUSIZ1=$20
 
 level1 playfield:
   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -76,6 +95,17 @@ end
   if pfread(p0GXRight,p0GY) then player0x = player0x - 1
   if pfread(p0GXLeft,p0GY) then player0x = player0x + 1
   if pfread(p0GX,p0GYUp) then player0y = player0y + 1
+
+  if joy0right then aimDirection = 0
+  if joy0down then aimDirection = 2
+  if joy0left then aimDirection = 4
+  if joy0up then aimDirection = 6
+  if joy0right && joy0down then aimDirection = 1
+  if joy0left && joy0down then aimDirection = 3
+  if joy0left && joy0up then aimDirection = 5
+  if joy0right && joy0up then aimDirection = 7
+  score = 0
+  score = score + aimDirection
 
   if joy0up && jumpCounter=0 && pfread(p0GX,p0GYDown) then jumpCounter = 1
   if jumpCounter>0 && jumpCounter<11 then player0y = player0y - 2 : jumpCounter = jumpCounter + 1
