@@ -8,6 +8,12 @@
   dim bmp_48x1_1_color = a
   dim frame = b
   dim screenwait = c
+  dim p0GX = d
+  dim p0GXLeft = e
+  dim p0GXRight = f
+  dim p0GYUp = g
+  dim p0GY = h
+  dim p0GYDown = i
 
   bmp_48x1_1_color = blue
   frame = 0
@@ -26,7 +32,7 @@ drawmainmenu
 
 begin
   player0x = 128
-  player0y = 68
+  player0y = 13
 
 
 start
@@ -52,6 +58,20 @@ level1 playfield:
 end
   ballx = 24
   bally = 13
+
+  p0GX = (player0x - 13) / 4
+  p0GXRight = (player0x - 9) / 4
+  p0GXLeft = (player0x - 17) / 4
+  p0GYDown = player0y / 8
+  p0GY = (player0y - 4) / 8
+  p0GYUp = (player0y - 8) / 8
+
+  if joy0left then player0x = player0x - 1
+  if joy0right then player0x = player0x + 1
+
+  if !pfread(p0GX,p0GYDown) then player0y = player0y + 1
+  if pfread(p0GXRight,p0GY) then player0x = player0x - 1
+  if pfread(p0GXLeft,p0GY) then player0x = player0x + 1
 
   player0:
   %00011000
