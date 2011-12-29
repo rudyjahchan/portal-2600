@@ -1,4 +1,4 @@
-  set romsize 8k
+  set romsize 16k
 
   const orange = $3A
   const blue = $AA
@@ -25,9 +25,16 @@ drawmainmenu
 cakeisalie
   gosub cakedrawscreen bank2
   screenwait = screenwait + 1
-  if screenwait < 120 goto cakeisalie
-  if joy0fire then screenwait = 0 : goto willyoumarryme
+  if screenwait < 30 then goto cakeisalie
+  if joy0fire then screenwait = 0 : goto ourloveisreal
   goto cakeisalie
+
+ourloveisreal
+  gosub lovedrawscreen bank3
+  screenwait = screenwait + 1
+  if screenwait < 30 then goto ourloveisreal
+  if joy0fire then goto willyoumarryme
+  goto ourloveisreal
 
 willyoumarryme
   gosub willyoumarrymedrawscreen bank2
@@ -41,4 +48,9 @@ end
   asm
   include "cake-is-a-lie/asm/cakescreen.asm"
   include "will-you-marry-me/asm/wymmscreen.asm"
+end
+
+  bank 3
+  asm
+  include "our-love-is-real/asm/lovescreen.asm"
 end
