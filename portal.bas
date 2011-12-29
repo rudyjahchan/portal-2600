@@ -1,11 +1,13 @@
+  include div_mul.asm
+
   set romsize 16k
 
   const orange = $3A
   const blue = $AA
 
   dim bmp_48x1_1_color = a
-  dim frame = d
-  dim screenwait = e
+  dim frame = b
+  dim screenwait = c
 
   bmp_48x1_1_color = blue
   frame = 0
@@ -19,8 +21,52 @@ mainmenu
 
 drawmainmenu
   gosub titledrawscreen bank2
-  if joy0fire then goto cakeisalie
+  if joy0fire then goto begin
   goto mainmenu
+
+begin
+  player0x = 128
+  player0y = 68
+
+
+start
+  if switchreset then reboot
+  COLUBK = $0F
+  COLUPF = $00
+  COLUP0 = orange
+  COLUP1 = blue
+  CTRLPF = $21
+
+level1 playfield:
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  X..............................X
+  XXXXXXXXXXXXXXXXXXX............X
+  XXXXXXXXXXXXXXXXXX.............X
+  X......................XXXXXXXXX
+  X........XXXXXXXXXXXXXXX.......X
+  X........XXXXXXXXXXXXXX........X
+  X..............................X
+  XXXXXXXXXXXXXXXXXXXXXXX........X
+  XXXXXXXXXXXXXXXXXXXXXXX........X
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+end
+  ballx = 24
+  bally = 13
+
+  player0:
+  %00011000
+  %00011000
+  %00011000
+  %00011000
+  %00011100
+  %00011000
+  %00001100
+  %00001100
+end
+
+  drawscreen
+  goto start
+
 
 cakeisalie
   gosub cakedrawscreen bank2
