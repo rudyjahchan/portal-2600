@@ -33,8 +33,15 @@ ourloveisreal
   gosub lovedrawscreen bank2
   screenwait = screenwait + 1
   if screenwait < 30 then goto ourloveisreal
-  if joy0fire then goto willyoumarryme
+  if joy0fire then screenwait = 0 : goto caseymckinnon
   goto ourloveisreal
+
+caseymckinnon
+  gosub caseydrawscreen bank3
+  screenwait = screenwait + 1
+  if screenwait < 30 then goto caseymckinnon
+  if joy0fire then goto willyoumarryme
+  goto caseymckinnon
 
 willyoumarryme
   gosub willyoumarrymedrawscreen bank3
@@ -49,5 +56,6 @@ end
 
   bank 3
   asm
+  include "casey-mckinnon/asm/caseyscreen.asm"
   include "will-you-marry-me/asm/wymmscreen.asm"
 end
