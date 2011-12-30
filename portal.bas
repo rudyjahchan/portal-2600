@@ -119,22 +119,22 @@ envirocollisions
   if pfread(p0GXLeft,p0GY) then player0x = player0x + 1
   if pfread(p0GX,p0GYUp) then player0y = player0y + 1
 
-  if !collision(playfield,missile0) && orangePortalDirection=0 then missile0x = missile0x + 1
-  if !collision(playfield,missile0) && orangePortalDirection=1 then missile0y = missile0y + 1 : missile0x = missile0x + 1
-  if !collision(playfield,missile0) && orangePortalDirection=2 then missile0y = missile0y + 1
-  if !collision(playfield,missile0) && orangePortalDirection=3 then missile0x = missile0x - 1 : missile0y = missile0y + 1
-  if !collision(playfield,missile0) && orangePortalDirection=4 then missile0x = missile0x - 1
-  if !collision(playfield,missile0) && orangePortalDirection=5 then missile0x = missile0x - 1 : missile0y = missile0y - 1
-  if !collision(playfield,missile0) && orangePortalDirection=6 then missile0y = missile0y - 1
-  if !collision(playfield,missile0) && orangePortalDirection=7 then missile0x = missile0x + 1 : missile0y = missile0y - 1
-  if !collision(playfield,missile1) && bluePortalDirection=0 then missile1x = missile1x + 1
-  if !collision(playfield,missile1) && bluePortalDirection=1 then missile1y = missile1y + 1 : missile1x = missile1x + 1
-  if !collision(playfield,missile1) && bluePortalDirection=2 then missile1y = missile1y + 1
-  if !collision(playfield,missile1) && bluePortalDirection=3 then missile1x = missile1x - 1 : missile1y = missile1y + 1
-  if !collision(playfield,missile1) && bluePortalDirection=4 then missile1x = missile1x - 1
-  if !collision(playfield,missile1) && bluePortalDirection=5 then missile1x = missile1x - 1 : missile1y = missile1y - 1
-  if !collision(playfield,missile1) && bluePortalDirection=6 then missile1y = missile1y - 1
-  if !collision(playfield,missile1) && bluePortalDirection=7 then missile1x = missile1x + 1 : missile1y = missile1y - 1
+  if !collision(playfield,missile0) && orangePortalDirection=0 then missile0x = missile0x + 2
+  if !collision(playfield,missile0) && orangePortalDirection=1 then missile0y = missile0y + 2 : missile0x = missile0x + 2
+  if !collision(playfield,missile0) && orangePortalDirection=2 then missile0y = missile0y + 2
+  if !collision(playfield,missile0) && orangePortalDirection=3 then missile0x = missile0x - 2 : missile0y = missile0y + 2
+  if !collision(playfield,missile0) && orangePortalDirection=4 then missile0x = missile0x - 2
+  if !collision(playfield,missile0) && orangePortalDirection=5 then missile0x = missile0x - 2 : missile0y = missile0y - 2
+  if !collision(playfield,missile0) && orangePortalDirection=6 then missile0y = missile0y - 2
+  if !collision(playfield,missile0) && orangePortalDirection=7 then missile0x = missile0x + 2 : missile0y = missile0y - 2
+  if !collision(playfield,missile1) && bluePortalDirection=0 then missile1x = missile1x + 2
+  if !collision(playfield,missile1) && bluePortalDirection=1 then missile1y = missile1y + 2 : missile1x = missile1x + 2
+  if !collision(playfield,missile1) && bluePortalDirection=2 then missile1y = missile1y + 2
+  if !collision(playfield,missile1) && bluePortalDirection=3 then missile1x = missile1x - 2 : missile1y = missile1y + 2
+  if !collision(playfield,missile1) && bluePortalDirection=4 then missile1x = missile1x - 2
+  if !collision(playfield,missile1) && bluePortalDirection=5 then missile1x = missile1x - 2 : missile1y = missile1y - 2
+  if !collision(playfield,missile1) && bluePortalDirection=6 then missile1y = missile1y - 2
+  if !collision(playfield,missile1) && bluePortalDirection=7 then missile1x = missile1x + 2 : missile1y = missile1y - 2
 
   if joy0right then aimDirection = 0
   if joy0down then aimDirection = 2
