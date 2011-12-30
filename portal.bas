@@ -47,8 +47,6 @@ drawmainmenu
   goto mainmenu
 
 begin
-  player0x = 128
-  player0y = 13
   frame = 0
   runDirection = 0
   aimDirection = 0
@@ -63,6 +61,24 @@ begin
   teleported = 0
   screenwait = 0
   proposalWait = 0
+
+level1 playfield:
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  X..............................X
+  X..............................X
+  X..............................X
+  X..............................X
+  X..............................X
+  X..........X........X..........X
+  X..........X........X..........X
+  X..........X........X..........X
+  X..........X........X..........X
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+end
+  ballx = 133
+  bally = 72
+  player0x = 73
+  player0y = 80
 
 start
   if switchreset then reboot
@@ -81,22 +97,6 @@ setup
   NUSIZ0=$20
   NUSIZ1=$20
 
-level1 playfield:
-  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-  X..............................X
-  XXXXXXXXXXXXXXXXXXX............X
-  XXXXXXXXXXXXXXXXXX.............X
-  X......................XXXXXXXXX
-  X........XXXXXXXXXXXXXXX.......X
-  X........XXXXXXXXXXXXXX........X
-  X..............................X
-  XXXXXXXXXXXXXXXXXXXXXXX........X
-  XXXXXXXXXXXXXXXXXXXXXXX........X
-  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-end
-  ballx = 24
-  bally = 13
-
   p0GX = (player0x - 13) / 4
   p0GXRight = (player0x - 9) / 4
   p0GXLeft = (player0x - 17) / 4
@@ -104,7 +104,6 @@ end
   p0GY = (player0y - 4) / 8
   p0GYUp = (player0y - 8) / 8
 
-  if aimPortal then goto gravity
   if joy0left then player0x = player0x - 1 : runDirection = 4
   if joy0right then player0x = player0x + 1 : runDirection = 0
   if joy0up && jumpCounter=0 && pfread(p0GX,p0GYDown) then jumpCounter = 1
