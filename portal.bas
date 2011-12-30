@@ -61,9 +61,18 @@ begin
   aimPortal = 0
   activePortal = 0
   teleported = 0
+  screenwait = 0
+  proposalWait = 0
 
 start
   if switchreset then reboot
+
+  if !switchleftb then goto setup
+  proposalWait = proposalWait + 1
+  if proposalWait = 255 then screenwait = screenwait + 1
+  if screenwait = 24 then screenwait=0 : goto cakeisalie
+
+setup
   COLUBK = $0F
   COLUPF = $00
   COLUP0 = orange
@@ -226,22 +235,19 @@ donesetframe drawscreen
 cakeisalie
   gosub cakedrawscreen bank2
   screenwait = screenwait + 1
-  if screenwait < 30 then goto cakeisalie
-  if joy0fire then screenwait = 0 : goto ourloveisreal
+  if screenwait = 255 then goto ourloveisreal
   goto cakeisalie
 
 ourloveisreal
   gosub lovedrawscreen bank2
   screenwait = screenwait + 1
-  if screenwait < 30 then goto ourloveisreal
-  if joy0fire then screenwait = 0 : goto caseymckinnon
+  if screenwait = 255 then goto willyoumarryme
   goto ourloveisreal
 
 caseymckinnon
   gosub caseydrawscreen bank3
   screenwait = screenwait + 1
-  if screenwait < 30 then goto caseymckinnon
-  if joy0fire then goto willyoumarryme
+  if screenwait = 255 then goto willyoumarryme
   goto caseymckinnon
 
 willyoumarryme
