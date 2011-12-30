@@ -33,6 +33,7 @@
   frame = 0
   screenwait = 0
   aimPortal = 0
+  level = 0
 
 mainmenu
   frame = frame + 1
@@ -61,6 +62,15 @@ begin
   teleported = 0
   screenwait = 0
   proposalWait = 0
+  missile0x = 0
+  missile0y = 0
+  orangePortalDirection = 8
+  missile1x = 0
+  missile1y = 0
+  bluePortalDirection = 8
+
+  if level > 1 then level = 0
+  on level goto level1 level2
 
 level1 playfield:
   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -79,8 +89,29 @@ end
   bally = 72
   player0x = 73
   player0y = 80
+  goto start
+
+level2 playfield:
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  X..............................X
+  XXXXXXXXX......................X
+  XXXXXXXXX......................X
+  XXXXXXXXX......................X
+  XXXXXXXXX......................X
+  XXXXXXXXX....................XXX
+  XXXXXXXXX....................XXX
+  XXXXXXXXX....................XXX
+  XXXXXXXXX....................XXX
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+end
+  ballx = 135
+  bally = 42
+  player0x = 17
+  player0y = 16
+  goto start
 
 start
+  drawscreen
   if switchreset then reboot
 
   if !switchleftb then goto setup
@@ -96,6 +127,8 @@ setup
   CTRLPF = $21
   NUSIZ0=$20
   NUSIZ1=$20
+
+  if collision(player0,ball) then score = score + 1 : level = level + 1 : ballx = ballx + 160 : goto begin
 
   p0GX = (player0x - 13) / 4
   p0GXRight = (player0x - 9) / 4
@@ -227,8 +260,7 @@ jumpFrame player0:
         %00001100
 end
 
-donesetframe drawscreen
-  goto start
+donesetframe goto start
 
 
 cakeisalie
