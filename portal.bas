@@ -61,9 +61,18 @@ begin
   aimPortal = 0
   activePortal = 0
   teleported = 0
+  screenwait = 0
+  proposalWait = 0
 
 start
   if switchreset then reboot
+
+  if !switchleftb then goto setup
+  proposalWait = proposalWait + 1
+  if proposalWait = 255 then screenwait = screenwait + 1
+  if screenwait = 16 then screenwait=0 : goto cakeisalie
+
+setup
   COLUBK = $0F
   COLUPF = $00
   COLUP0 = orange
