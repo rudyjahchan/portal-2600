@@ -28,12 +28,14 @@
   dim level = u
   dim teleported = v
   dim proposalWait = w
+  dim soundCounter = x
 
   bmp_48x1_1_color = blue
   frame = 0
   screenwait = 0
   aimPortal = 0
   level = 0
+  soundCounter = 0
 
 mainmenu
   frame = frame + 1
@@ -45,9 +47,30 @@ drawmainmenu
   gosub titledrawscreen bank2
   if joy0fire then aimPortal = 1
   if !joy0fire && aimPortal=1 then goto begin
+  soundCounter = soundCounter + 1
+  if soundCounter>0 && soundCounter<8 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 27
+  if soundCounter>7 && soundCounter<16 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 15
+  if soundCounter>15 && soundCounter<24 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 16
+  if soundCounter>23 && soundCounter<32 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 18
+  if soundCounter>31 && soundCounter<40 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 18
+  if soundCounter>39 && soundCounter<48 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 16
+  if soundCounter>47 && soundCounter<120 then AUDV0 = 0
+  if soundCounter>119 && soundCounter<128 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 27
+  if soundCounter>127 && soundCounter<136 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 15
+  if soundCounter>135 && soundCounter<144 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 16
+  if soundCounter>143 && soundCounter<152 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 18
+  if soundCounter>151 && soundCounter<160 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 18
+  if soundCounter>159 && soundCounter<168 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 16
+  if soundCounter>167 && soundCounter<192 then AUDV0 = 0
+  if soundCounter>191 && soundCounter<208 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 20
+  if soundCounter>207 && soundCounter<216 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 18
+  if soundCounter>215 && soundCounter<224 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 27
+  if soundCounter>223 && soundCounter<248 then AUDV0 = 0
+  if soundCounter>247 then soundCounter = 1
   goto mainmenu
 
 begin
+  AUDV0 = 0
   frame = 0
   runDirection = 0
   aimDirection = 0
@@ -68,9 +91,10 @@ begin
   missile1x = 0
   missile1y = 0
   bluePortalDirection = 8
+  soundCounter = 0
 
-  if level > 1 then level = 0
-  on level goto level1 level2
+  if level > 2 then level = 0
+  on level goto level1 level2 level3
 
 level1 playfield:
   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -79,10 +103,10 @@ level1 playfield:
   X..............................X
   X..............................X
   X..............................X
-  X..........X........X..........X
-  X..........X........X..........X
-  X..........X........X..........X
-  X..........X........X..........X
+  X.........XX........XX.........X
+  X.........XX........XX.........X
+  X.........XX........XX.........X
+  X.........XX........XX.........X
   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 end
   ballx = 133
@@ -93,22 +117,40 @@ end
 
 level2 playfield:
   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   X..............................X
-  XXXXXXXXX......................X
-  XXXXXXXXX......................X
-  XXXXXXXXX......................X
-  XXXXXXXXX......................X
-  XXXXXXXXX....................XXX
-  XXXXXXXXX....................XXX
-  XXXXXXXXX....................XXX
-  XXXXXXXXX....................XXX
+  XXXXXXXXX................XXXXXXX
+  XXXXXXXXX................XXXXXXX
+  XXXXXXXXX................XXXXXXX
+  XXXXXXXXX................XXXXXXX
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+end
+  ballx = 135
+  bally = 40
+  player0x = 17
+  player0y = 48
+  goto start
+
+level3 playfield:
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  X........XX.............XXXXXXXX
+  XXXX.....XX..XXXXXXXXX..XXXXXXXX
+  XXXX.....XX..XX.........XXXXXXXX
+  XXXX.....XX..XX..XXXXXXXXXX....X
+  XXXX.........XX......X.........X
+  XXXX.........XX..XX..X..XXX..XXX
+  XXXXXXXXXXXXXXX..XX..X..XXX..XXX
+  XXXXXXXXXXXXXXX..XX..X..XXXXXXXX
+  XXXXXXXXXXXXXXX..XX.....XXXXXXXX
   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 end
   ballx = 135
   bally = 42
   player0x = 17
   player0y = 16
-  goto start
 
 start
   drawscreen
@@ -177,17 +219,23 @@ envirocollisions
   if joy0left && joy0up then aimDirection = 5
   if joy0right && joy0up then aimDirection = 7
 
-  if joy0fire then aimPortal=1
-  if !joy0fire && aimPortal=1 && activePortal=0 then missile0x = player0x+3 : missile0y=player0y-2 : activePortal=1 : aimPortal=0 : orangePortalDirection=aimDirection
-  if !joy0fire && aimPortal=1 && activePortal=1 then missile1x = player0x+3 : missile1y=player0y-2 : activePortal=0 : aimPortal=0 : bluePortalDirection=aimDirection
+  if aimPortal = 30 || !joy0fire then aimPortal = 0
+  if joy0fire && aimPortal=0 then AUDV0=5 : AUDC0=7 : AUDF0=6 : soundCounter = 1 
+  if joy0fire && aimPortal=0 && activePortal=0 then missile0x = player0x+3 : missile0y=player0y-3 : activePortal=1 : aimPortal=1 : orangePortalDirection=aimDirection 
+  if joy0fire && aimPortal=0 && activePortal=1 then missile1x = player0x+3 : missile1y=player0y-2 : activePortal=0 : aimPortal=1 : bluePortalDirection=aimDirection
+  if aimPortal <> 0 then aimPortal = aimPortal + 1
 
-  if collision(player0,missile0) && collision(playfield,missile0) && collision(playfield,missile1) && teleported=0 then teleported=1 : player0x = missile1x : player0y = missile1y
-  if collision(player0,missile1) && collision(playfield,missile1) && collision(playfield,missile0) && teleported=0 then teleported=1 : player0x = missile0x : player0y = missile0y
+  if collision(missile0,missile1) then goto setframe
+  if collision(player0,missile0) && collision(playfield,missile0) && collision(playfield,missile1) && teleported=0 then teleported=1 : player0x = missile1x : player0y = missile1y : AUDV0=5 : AUDC0=7 : AUDF0=4 : soundCounter = 1
+  if collision(player0,missile1) && collision(playfield,missile1) && collision(playfield,missile0) && teleported=0 then teleported=1 : player0x = missile0x : player0y = missile0y : AUDV0=5 : AUDC0=7 : AUDF0=4 : soundCounter = 1
   if !collision(player0,missile0) && !collision(player0,missile1) then teleported=0
 
+  if soundCounter>0 && soundCounter<6 then soundCounter = soundCounter + 1
+  if soundCounter>5 then AUDV0 = 0 : soundCounter = 0
+
+setframe
   if runDirection>2 && runDirection<6 then REFP0 = 8
-  if jumpCounter>0 then goto jumpFrame
-  if joy0left || joy0right then goto animate else frame = 0
+  if jumpCounter>0 then goto jumpFrame if joy0left || joy0right then goto animate else frame = 0
   player0:
   %00011000
   %00011000
