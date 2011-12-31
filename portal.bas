@@ -46,7 +46,7 @@ mainmenu
 drawmainmenu
   gosub titledrawscreen bank2
   if joy0fire then aimPortal = 1
-  if !joy0fire && aimPortal=1 then goto begin
+  if !joy0fire && aimPortal=1 then score = 999999 : goto begin
   soundCounter = soundCounter + 1
   if soundCounter>0 && soundCounter<8 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 27
   if soundCounter>7 && soundCounter<16 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 15
@@ -231,6 +231,8 @@ end
 start
   drawscreen
   if switchreset then reboot
+
+  score = score - 1
 
   if !switchleftb then goto setup
   proposalWait = proposalWait + 1
