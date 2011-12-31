@@ -28,11 +28,14 @@
   dim level = u
   dim teleported = v
   dim proposalWait = w
+  dim soundCounter = x
 
   bmp_48x1_1_color = blue
   frame = 0
   screenwait = 0
   aimPortal = 0
+  level = 0
+  soundCounter = 0
 
 mainmenu
   frame = frame + 1
@@ -44,11 +47,30 @@ drawmainmenu
   gosub titledrawscreen bank2
   if joy0fire then aimPortal = 1
   if !joy0fire && aimPortal=1 then goto begin
+  soundCounter = soundCounter + 1
+  if soundCounter>0 && soundCounter<8 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 27
+  if soundCounter>7 && soundCounter<16 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 15
+  if soundCounter>15 && soundCounter<24 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 16
+  if soundCounter>23 && soundCounter<32 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 18
+  if soundCounter>31 && soundCounter<40 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 18
+  if soundCounter>39 && soundCounter<48 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 16
+  if soundCounter>47 && soundCounter<120 then AUDV0 = 0
+  if soundCounter>119 && soundCounter<128 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 27
+  if soundCounter>127 && soundCounter<136 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 15
+  if soundCounter>135 && soundCounter<144 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 16
+  if soundCounter>143 && soundCounter<152 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 18
+  if soundCounter>151 && soundCounter<160 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 18
+  if soundCounter>159 && soundCounter<168 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 16
+  if soundCounter>167 && soundCounter<192 then AUDV0 = 0
+  if soundCounter>191 && soundCounter<208 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 20
+  if soundCounter>207 && soundCounter<216 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 18
+  if soundCounter>215 && soundCounter<224 then AUDV0 = 10 : AUDC0 = 12 : AUDF0 = 27
+  if soundCounter>223 && soundCounter<248 then AUDV0 = 0
+  if soundCounter>247 then soundCounter = 1
   goto mainmenu
 
 begin
-  player0x = 128
-  player0y = 13
+  AUDV0 = 0
   frame = 0
   runDirection = 0
   aimDirection = 0
@@ -63,8 +85,75 @@ begin
   teleported = 0
   screenwait = 0
   proposalWait = 0
+  missile0x = 0
+  missile0y = 0
+  orangePortalDirection = 8
+  missile1x = 0
+  missile1y = 0
+  bluePortalDirection = 8
+  soundCounter = 0
+
+  if level > 2 then level = 0
+  on level goto level1 level2 level3
+
+level1 playfield:
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  X..............................X
+  X..............................X
+  X..............................X
+  X..............................X
+  X..............................X
+  X.........XX........XX.........X
+  X.........XX........XX.........X
+  X.........XX........XX.........X
+  X.........XX........XX.........X
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+end
+  ballx = 133
+  bally = 72
+  player0x = 73
+  player0y = 80
+  goto start
+
+level2 playfield:
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  X..............................X
+  XXXXXXXXX................XXXXXXX
+  XXXXXXXXX................XXXXXXX
+  XXXXXXXXX................XXXXXXX
+  XXXXXXXXX................XXXXXXX
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+end
+  ballx = 135
+  bally = 40
+  player0x = 17
+  player0y = 48
+  goto start
+
+level3 playfield:
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  X........XX.............XXXXXXXX
+  XXXX.....XX..XXXXXXXXX..XXXXXXXX
+  XXXX.....XX..XX.........XXXXXXXX
+  XXXX.....XX..XX..XXXXXXXXXX....X
+  XXXX.........XX......X.........X
+  XXXX.........XX..XX..X..XXX..XXX
+  XXXXXXXXXXXXXXX..XX..X..XXX..XXX
+  XXXXXXXXXXXXXXX..XX..X..XXXXXXXX
+  XXXXXXXXXXXXXXX..XX.....XXXXXXXX
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+end
+  ballx = 135
+  bally = 42
+  player0x = 17
+  player0y = 16
 
 start
+  drawscreen
   if switchreset then reboot
 
   if !switchleftb then goto setup
@@ -81,21 +170,7 @@ setup
   NUSIZ0=$20
   NUSIZ1=$20
 
-level1 playfield:
-  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-  X..............................X
-  XXXXXXXXXXXXXXXXXXX............X
-  XXXXXXXXXXXXXXXXXX.............X
-  X......................XXXXXXXXX
-  X........XXXXXXXXXXXXXXX.......X
-  X........XXXXXXXXXXXXXX........X
-  X..............................X
-  XXXXXXXXXXXXXXXXXXXXXXX........X
-  XXXXXXXXXXXXXXXXXXXXXXX........X
-  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-end
-  ballx = 24
-  bally = 13
+  if collision(player0,ball) then score = score + 1 : level = level + 1 : ballx = ballx + 160 : goto begin
 
   p0GX = (player0x - 13) / 4
   p0GXRight = (player0x - 9) / 4
@@ -104,7 +179,6 @@ end
   p0GY = (player0y - 4) / 8
   p0GYUp = (player0y - 8) / 8
 
-  if aimPortal then goto gravity
   if joy0left then player0x = player0x - 1 : runDirection = 4
   if joy0right then player0x = player0x + 1 : runDirection = 0
   if joy0up && jumpCounter=0 && pfread(p0GX,p0GYDown) then jumpCounter = 1
@@ -119,22 +193,22 @@ envirocollisions
   if pfread(p0GXLeft,p0GY) then player0x = player0x + 1
   if pfread(p0GX,p0GYUp) then player0y = player0y + 1
 
-  if !collision(playfield,missile0) && orangePortalDirection=0 then missile0x = missile0x + 1
-  if !collision(playfield,missile0) && orangePortalDirection=1 then missile0y = missile0y + 1 : missile0x = missile0x + 1
-  if !collision(playfield,missile0) && orangePortalDirection=2 then missile0y = missile0y + 1
-  if !collision(playfield,missile0) && orangePortalDirection=3 then missile0x = missile0x - 1 : missile0y = missile0y + 1
-  if !collision(playfield,missile0) && orangePortalDirection=4 then missile0x = missile0x - 1
-  if !collision(playfield,missile0) && orangePortalDirection=5 then missile0x = missile0x - 1 : missile0y = missile0y - 1
-  if !collision(playfield,missile0) && orangePortalDirection=6 then missile0y = missile0y - 1
-  if !collision(playfield,missile0) && orangePortalDirection=7 then missile0x = missile0x + 1 : missile0y = missile0y - 1
-  if !collision(playfield,missile1) && bluePortalDirection=0 then missile1x = missile1x + 1
-  if !collision(playfield,missile1) && bluePortalDirection=1 then missile1y = missile1y + 1 : missile1x = missile1x + 1
-  if !collision(playfield,missile1) && bluePortalDirection=2 then missile1y = missile1y + 1
-  if !collision(playfield,missile1) && bluePortalDirection=3 then missile1x = missile1x - 1 : missile1y = missile1y + 1
-  if !collision(playfield,missile1) && bluePortalDirection=4 then missile1x = missile1x - 1
-  if !collision(playfield,missile1) && bluePortalDirection=5 then missile1x = missile1x - 1 : missile1y = missile1y - 1
-  if !collision(playfield,missile1) && bluePortalDirection=6 then missile1y = missile1y - 1
-  if !collision(playfield,missile1) && bluePortalDirection=7 then missile1x = missile1x + 1 : missile1y = missile1y - 1
+  if !collision(playfield,missile0) && orangePortalDirection=0 then missile0x = missile0x + 2
+  if !collision(playfield,missile0) && orangePortalDirection=1 then missile0y = missile0y + 2 : missile0x = missile0x + 2
+  if !collision(playfield,missile0) && orangePortalDirection=2 then missile0y = missile0y + 2
+  if !collision(playfield,missile0) && orangePortalDirection=3 then missile0x = missile0x - 2 : missile0y = missile0y + 2
+  if !collision(playfield,missile0) && orangePortalDirection=4 then missile0x = missile0x - 2
+  if !collision(playfield,missile0) && orangePortalDirection=5 then missile0x = missile0x - 2 : missile0y = missile0y - 2
+  if !collision(playfield,missile0) && orangePortalDirection=6 then missile0y = missile0y - 2
+  if !collision(playfield,missile0) && orangePortalDirection=7 then missile0x = missile0x + 2 : missile0y = missile0y - 2
+  if !collision(playfield,missile1) && bluePortalDirection=0 then missile1x = missile1x + 2
+  if !collision(playfield,missile1) && bluePortalDirection=1 then missile1y = missile1y + 2 : missile1x = missile1x + 2
+  if !collision(playfield,missile1) && bluePortalDirection=2 then missile1y = missile1y + 2
+  if !collision(playfield,missile1) && bluePortalDirection=3 then missile1x = missile1x - 2 : missile1y = missile1y + 2
+  if !collision(playfield,missile1) && bluePortalDirection=4 then missile1x = missile1x - 2
+  if !collision(playfield,missile1) && bluePortalDirection=5 then missile1x = missile1x - 2 : missile1y = missile1y - 2
+  if !collision(playfield,missile1) && bluePortalDirection=6 then missile1y = missile1y - 2
+  if !collision(playfield,missile1) && bluePortalDirection=7 then missile1x = missile1x + 2 : missile1y = missile1y - 2
 
   if joy0right then aimDirection = 0
   if joy0down then aimDirection = 2
@@ -145,17 +219,23 @@ envirocollisions
   if joy0left && joy0up then aimDirection = 5
   if joy0right && joy0up then aimDirection = 7
 
-  if joy0fire then aimPortal=1
-  if !joy0fire && aimPortal=1 && activePortal=0 then missile0x = player0x+3 : missile0y=player0y-2 : activePortal=1 : aimPortal=0 : orangePortalDirection=aimDirection
-  if !joy0fire && aimPortal=1 && activePortal=1 then missile1x = player0x+3 : missile1y=player0y-2 : activePortal=0 : aimPortal=0 : bluePortalDirection=aimDirection
+  if aimPortal = 30 || !joy0fire then aimPortal = 0
+  if joy0fire && aimPortal=0 then AUDV0=5 : AUDC0=7 : AUDF0=6 : soundCounter = 1 
+  if joy0fire && aimPortal=0 && activePortal=0 then missile0x = player0x+3 : missile0y=player0y-3 : activePortal=1 : aimPortal=1 : orangePortalDirection=aimDirection 
+  if joy0fire && aimPortal=0 && activePortal=1 then missile1x = player0x+3 : missile1y=player0y-2 : activePortal=0 : aimPortal=1 : bluePortalDirection=aimDirection
+  if aimPortal <> 0 then aimPortal = aimPortal + 1
 
-  if collision(player0,missile0) && collision(playfield,missile0) && collision(playfield,missile1) && teleported=0 then teleported=1 : player0x = missile1x : player0y = missile1y
-  if collision(player0,missile1) && collision(playfield,missile1) && collision(playfield,missile0) && teleported=0 then teleported=1 : player0x = missile0x : player0y = missile0y
+  if collision(missile0,missile1) then goto setframe
+  if collision(player0,missile0) && collision(playfield,missile0) && collision(playfield,missile1) && teleported=0 then teleported=1 : player0x = missile1x : player0y = missile1y : AUDV0=5 : AUDC0=7 : AUDF0=4 : soundCounter = 1
+  if collision(player0,missile1) && collision(playfield,missile1) && collision(playfield,missile0) && teleported=0 then teleported=1 : player0x = missile0x : player0y = missile0y : AUDV0=5 : AUDC0=7 : AUDF0=4 : soundCounter = 1
   if !collision(player0,missile0) && !collision(player0,missile1) then teleported=0
 
+  if soundCounter>0 && soundCounter<6 then soundCounter = soundCounter + 1
+  if soundCounter>5 then AUDV0 = 0 : soundCounter = 0
+
+setframe
   if runDirection>2 && runDirection<6 then REFP0 = 8
-  if jumpCounter>0 then goto jumpFrame
-  if joy0left || joy0right then goto animate else frame = 0
+  if jumpCounter>0 then goto jumpFrame if joy0left || joy0right then goto animate else frame = 0
   player0:
   %00011000
   %00011000
@@ -228,8 +308,7 @@ jumpFrame player0:
         %00001100
 end
 
-donesetframe drawscreen
-  goto start
+donesetframe goto start
 
 
 cakeisalie
