@@ -93,8 +93,8 @@ begin
   bluePortalDirection = 8
   soundCounter = 0
 
-  if level > 2 then level = 0
-  on level goto level1 level2 level3
+  if level > 6 then goto cakeisalie
+  on level goto level1 level2 level3 level4 level5 level6 level7
 
 level1 playfield:
   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -117,24 +117,100 @@ end
 
 level2 playfield:
   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   X..............................X
-  XXXXXXXXX................XXXXXXX
-  XXXXXXXXX................XXXXXXX
-  XXXXXXXXX................XXXXXXX
-  XXXXXXXXX................XXXXXXX
+  X..............................X
+  X..............................X
+  X.........XXXXXXXXXXXX.........X
+  X.........XXXXXXXXXXXX.........X
+  X.........XXXXXXXXXXXX.........X
+  X.........XXXXXXXXXXXX.........X
+  X.........XXXXXXXXXXXX.........X
+  X.........XXXXXXXXXXXX.........X
   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 end
   ballx = 135
+  bally = 72
+  player0x = 17
+  player0y = 80
+  goto start
+
+level3 playfield:
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  XXXXXXXXXXXX...................X
+  XXXXXXXXXXXX...................X
+  XXXXXXXXXXXX......XXXXXXX......X
+  XXXXXXXXXXXX......XXXXXXX......X
+  X.................XXXXXXX......X
+  X.................XXXXXXX......X
+  X.....XXXXXX......XXXXXXX......X
+  X.....XXXXXX......XXXXXXX......X
+  X.....XXXXXX......XXXXXXX......X
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+end
+  ballx = 135
+  bally = 72
+  player0x = 17
+  player0y = 80
+  goto start
+
+level4 playfield:
+  XXX..XXX............XXXXXXXXXXXX
+  X..............................X
+  X..............................X
+  X..............................X
+  X..............................X
+  X..............................X
+  X...................XXXXXXXXXXXX
+  X...................XXXXXXXXXXXX
+  X...................XXXXXXXXXXXX
+  X...................XXXXXXXXXXXX
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+end
+  ballx = 133
+  bally = 40
+  player0x = 17
+  player0y = 80
+  goto start
+
+level5 playfield:
+  ................................
+  ................................
+  ................................
+  ................................
+  X..............................X
+  X..............................X
+  XXXXXXXX............XXXXXXXXXXXX
+  XXXXXXXX............XXXXXXXXXXXX
+  XXXXXXXX............XXXXXXXXXXXX
+  XXXXXXXX............XXXXXXXXXXXX
+  XXXXXXXX............XXXXXXXXXXXX
+end
+  ballx = 133
   bally = 40
   player0x = 17
   player0y = 48
   goto start
 
-level3 playfield:
+level6 playfield:
+  ..........X.....................
+  ................................
+  X...................X..........X
+  X..........xxxx.....X..........X
+  X..........XXXX.....X..........X
+  X..........XXXX.........XXX....X
+  X......XX..XXXX................X
+  X..........XXXX.............XXXX
+  X.......XXXXXXX..........XXXXXXX
+  X.......XXXXXXX..........XXXXXXX
+  XXXX..XXXXXXXXXXXXXXXXXXXXXXXXXX
+end
+  ballx = 133
+  bally = 48
+  player0x = 17
+  player0y = 80
+  goto start
+
+level7 playfield:
   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   X........XX.............XXXXXXXX
   XXXX.....XX..XXXXXXXXX..XXXXXXXX
@@ -193,6 +269,8 @@ envirocollisions
   if pfread(p0GXLeft,p0GY) then player0x = player0x + 1
   if pfread(p0GX,p0GYUp) then player0y = player0y + 1
 
+  if player0y<0 || player0y>84 then goto begin
+
   if !collision(playfield,missile0) && orangePortalDirection=0 then missile0x = missile0x + 2
   if !collision(playfield,missile0) && orangePortalDirection=1 then missile0y = missile0y + 2 : missile0x = missile0x + 2
   if !collision(playfield,missile0) && orangePortalDirection=2 then missile0y = missile0y + 2
@@ -201,6 +279,8 @@ envirocollisions
   if !collision(playfield,missile0) && orangePortalDirection=5 then missile0x = missile0x - 2 : missile0y = missile0y - 2
   if !collision(playfield,missile0) && orangePortalDirection=6 then missile0y = missile0y - 2
   if !collision(playfield,missile0) && orangePortalDirection=7 then missile0x = missile0x + 2 : missile0y = missile0y - 2
+  if missile0x<0 || missile0x>159 then missile0x = 0 : missile0y = 0 : orangePortalDirection = 8
+  if missile0y<0 || missile0y>88 then missile0x = 0 : missile0y = 0 : orangePortalDirection = 8
   if !collision(playfield,missile1) && bluePortalDirection=0 then missile1x = missile1x + 2
   if !collision(playfield,missile1) && bluePortalDirection=1 then missile1y = missile1y + 2 : missile1x = missile1x + 2
   if !collision(playfield,missile1) && bluePortalDirection=2 then missile1y = missile1y + 2
@@ -209,6 +289,8 @@ envirocollisions
   if !collision(playfield,missile1) && bluePortalDirection=5 then missile1x = missile1x - 2 : missile1y = missile1y - 2
   if !collision(playfield,missile1) && bluePortalDirection=6 then missile1y = missile1y - 2
   if !collision(playfield,missile1) && bluePortalDirection=7 then missile1x = missile1x + 2 : missile1y = missile1y - 2
+  if missile1x<0 || missile1x>159 then missile1x = 0 : missile1y = 0 : bluePortalDirection = 8
+  if missile1y<0 || missile1y>88 then missile1x = 0 : missile1y = 0 : bluePortalDirection = 8
 
   if joy0right then aimDirection = 0
   if joy0down then aimDirection = 2
